@@ -16,7 +16,7 @@ export async function main(options: CommandOptions, command: Command) {
   const targetPath = options.Path || path.resolve();
 
   const { flattedTree } = await getTree(targetPath);
-  console.warn({ flattedTree });
+
   await generateIntroduction(flattedTree);
   await generateDocs(flattedTree);
   // await generateMintJson(flattedTree);
