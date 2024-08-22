@@ -7,19 +7,19 @@ import { generateDocs } from "./actions/generateDocs.ts";
 import { configApiKeyEnv } from "../helpers/validateApiKeyEnv.ts";
 
 interface CommandOptions {
-    Path: string;
+  Path: string;
 }
 
 export async function main(options: CommandOptions, command: Command) {
-    await configApiKeyEnv();
+  await configApiKeyEnv();
 
-    const targetPath = options.Path || path.resolve();
+  const targetPath = options.Path || path.resolve();
 
-    const { flattedTree } = await getTree(targetPath);
+  const { flattedTree } = await getTree(targetPath);
+  console.warn({ flattedTree });
+  await generateIntroduction(flattedTree);
+  await generateDocs(flattedTree);
+  // await generateMintJson(flattedTree);
 
-    await generateIntroduction(flattedTree);
-    await generateDocs(flattedTree);
-    // await generateMintJson(flattedTree);
-
-    // await writeFile("./test-output.json", JSON.stringify(flattedTree, null, 4));
+  // await writeFile("./test-output.json", JSON.stringify(flattedTree, null, 4));
 }
